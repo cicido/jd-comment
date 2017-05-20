@@ -22,11 +22,11 @@ object TaggerDemo {
     */
 
     val tagger:MaxentTagger  = new MaxentTagger(args(0))
-    List<List<HasWord>> sentences = MaxentTagger.tokenizeText(new BufferedReader(new FileReader(args(1))))
+    val sentences:List<List<HasWord>>= MaxentTagger.tokenizeText(new BufferedReader(new FileReader(args(1))))
 
     for (sentence:List<HasWord> <- sentences) {
-      List<TaggedWord> tSentence = tagger.tagSentence(sentence);
-      System.out.println(SentenceUtils.listToString(tSentence, false));
+      val tSentence:List<TaggedWord> = tagger.tagSentence(sentence)
+      println(SentenceUtils.listToString(tSentence, false))
     }
   }
 
