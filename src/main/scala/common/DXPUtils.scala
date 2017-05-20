@@ -4,6 +4,7 @@ import com.hankcs.hanlp.HanLP
 import org.apache.spark.sql.DataFrame
 import org.apache.spark.sql.hive.HiveContext
 import org.apache.spark.sql.types._
+
 import scala.collection.JavaConversions._
 
 /**
@@ -21,6 +22,7 @@ object DXPUtils {
                     hiveContext: HiveContext, partionType:String): Unit = {
     val cols = df.columns
     val sma = df.schema
+    df.printSchema()
     val colsType = cols.map(r => {
       sma(r).dataType match {
         case IntegerType => "int"

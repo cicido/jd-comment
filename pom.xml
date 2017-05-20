@@ -25,6 +25,14 @@
     </repositories>
 
     <dependencies>
+
+        <dependency>
+            <groupId>stanford.nlp</groupId>
+            <artifactId>stanford-postagger</artifactId>
+            <version>3.7.0</version>
+            <scope>system</scope>
+            <systemPath>D:/stanford-postagger-full-2016-10-31/stanford-postagger-3.7.0.jar</systemPath>
+        </dependency>
         <dependency>
             <groupId>com.hankcs</groupId>
             <artifactId>hanlp</artifactId>
