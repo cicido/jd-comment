@@ -25,20 +25,12 @@
     </repositories>
 
     <dependencies>
-
-        <dependency>
-            <groupId>stanford.nlp</groupId>
-            <artifactId>stanford-postagger</artifactId>
-            <version>3.7.0</version>
-            <scope>system</scope>
-            <systemPath>D:/stanford-postagger-full-2016-10-31/stanford-postagger-3.7.0.jar</systemPath>
-        </dependency>
         <dependency>
             <groupId>com.hankcs</groupId>
             <artifactId>hanlp</artifactId>
             <version>portable-1.3.1</version>
             <scope>system</scope>
-            <systemPath>D:/idea-workspace/dmnbtext_in_spark/lib/hanlp-portable-1.3.1.jar</systemPath>
+            <systemPath>D:/jarlib/hanlp-portable-1.3.1.jar</systemPath>
         </dependency>
 
         <dependency>
@@ -50,6 +42,12 @@
             <groupId>org.scala-lang</groupId>
             <artifactId>scala-compiler</artifactId>
             <version>${scala.version}</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>scala-library</artifactId>
+                    <groupId>org.scala-lang</groupId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>org.scala-lang</groupId>
@@ -176,6 +174,10 @@
                 <exclusion>
                     <artifactId>snappy-java</artifactId>
                     <groupId>org.xerial.snappy</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>scala-reflect</artifactId>
+                    <groupId>org.scala-lang</groupId>
                 </exclusion>
             </exclusions>
         </dependency>
@@ -425,7 +427,7 @@
                         </goals>
                         <configuration>
                             <args>
-                                <arg>-make:transitive</arg>
+                                <!--<arg>-make:transitive</arg>-->
                                 <arg>-dependencyfile</arg>
                                 <arg>${project.build.directory}/.scala_dependencies</arg>
                             </args>
