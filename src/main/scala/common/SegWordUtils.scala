@@ -3,7 +3,6 @@ package common
 import com.hankcs.hanlp.HanLP
 import com.hankcs.hanlp.dictionary.CustomDictionary
 import com.hankcs.hanlp.dictionary.stopword.CoreStopWordDictionary
-import com.hankcs.hanlp.tokenizer.NotionalTokenizer
 
 import scala.collection.JavaConversions._
 
