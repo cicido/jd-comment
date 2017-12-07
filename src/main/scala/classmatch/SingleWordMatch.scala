@@ -107,7 +107,7 @@ object SingleWordMatch {
     val classifier:DMNBTextClassifierOpt = new DMNBTextClassifierOpt(50)
     classifier.trainClassifier(trainData)
 
-    val commentSQL = s"select commentid, content,nature,devicecode,brandcode,storename,storeid from " +
+    val commentSQL = s"select commentid, content,nature,devicecode,brandcode,storename,storeid,createtime from " +
       s"${srcTable} where dt=${dt} and nature < 1"
 
     val commentRDD = sparkEnv.hiveContext.sql(commentSQL).repartition(200).map(r => {
@@ -200,6 +200,7 @@ object SingleWordMatch {
       val brandcode = r.getAs[String](4)
       val storename = r.getAs[String](5)
       val storeid = r.getAs[String](6)
+      val createtime = r.getAs[Long](7)
 
       /*(commentid, nature, content, mwords.mkString(",") + "|" + dwords.mkString(","),
         mergeClass.mkString(","),
@@ -210,7 +211,7 @@ object SingleWordMatch {
         */
       (commentid, nature, content, mwords.mkString(",") + "|" + dwords.mkString(","),
         mergeClass.mkString(","),
-        devicecode, brandcode, storename, storeid)
+        devicecode, brandcode, storename, storeid,createtime)
     })
 
     val trDF = {
@@ -222,8 +223,9 @@ object SingleWordMatch {
         "devicecode", "brandcode", "storename", "storeid")
         */
       commentRDD.toDF("commentid", "nature", "content", "words","class",
-        "devicecode", "brandcode", "storename", "storeid").repartition(1)
+        "devicecode", "brandcode", "storename", "storeid","createtime").repartition(1)
     }
+    trDF.printSchema()
     DXPUtils.saveDataFrame(trDF, dstTable, dt, sparkEnv.hiveContext)
   }
 }
